@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://iibal1xi2vcn"]
+
+[ext_resource type="PackedScene" uid="uid://bio1udl5pdngs" path="res://Planet/gas_giant.tscn" id="1_n4nu4"]
+[ext_resource type="Texture2D" uid="uid://cev5rbgyxoig0" path="res://spaceScene/59a94d35-9857-450d-8f7a-1c00a7dfac65.jpg" id="2_n4nu4"]
+[ext_resource type="Script" uid="uid://ckp5qfn7gfp7g" path="res://Planet/gasgiantplanet.gd" id="2_wmans"]
+[ext_resource type="PackedScene" uid="uid://tv3lb1e6jju7" path="res://Movement/Probe/probe.tscn" id="4_48bhw"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_48bhw"]
+radius = 5.07236
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_48bhw"]
+panorama = ExtResource("2_n4nu4")
+filter = false
+
+[sub_resource type="Sky" id="Sky_iqqmu"]
+sky_material = SubResource("PanoramaSkyMaterial_48bhw")
+
+[sub_resource type="Environment" id="Environment_tp7dn"]
+background_mode = 2
+background_energy_multiplier = 1.34
+sky = SubResource("Sky_iqqmu")
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.0
+reflected_light_source = 1
+fog_enabled = true
+fog_light_energy = 0.0
+fog_density = 0.001
+fog_sky_affect = 0.768
+volumetric_fog_density = 0.02
+volumetric_fog_emission_energy = 0.5
+volumetric_fog_detail_spread = 4.39226
+
+[node name="Space" type="Node3D"]
+
+[node name="GasGiant" parent="." instance=ExtResource("1_n4nu4")]
+transform = Transform3D(55.8633, 21.8926, 0, -21.8926, 55.8633, 0, 0, 0, 60, 0, 0, 0)
+script = ExtResource("2_wmans")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GasGiant"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GasGiant/StaticBody3D"]
+transform = Transform3D(1, -0.000413507, -0.000362414, 0.000413507, 1, 9.76012e-05, 0.000362368, -9.7773e-05, 1, 0, 0, 0)
+shape = SubResource("SphereShape3D_48bhw")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tp7dn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.959808, 0.218236, -0.176471, -0.224754, -0.221086, 0.949003, 0.168091, 0.950523, 0.261249, 131.611, 86.5353, 0)
+light_specular = 0.0
+shadow_enabled = true
+directional_shadow_fade_start = 1.0
+directional_shadow_max_distance = 6009.2
+sky_mode = 1
+
+[node name="Probe" parent="." instance=ExtResource("4_48bhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 379.567, 33.2793, 0)

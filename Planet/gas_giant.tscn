@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bio1udl5pdngs"]
+
+[ext_resource type="PackedScene" uid="uid://d2y6634vycf34" path="res://spaceScene/gas_giant.glb" id="1_fwmvm"]
+
+[node name="GasGiant" type="Node3D"]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_fwmvm")]
