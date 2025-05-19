@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://iibal1xi2vcn"]
+[gd_scene load_steps=12 format=3 uid="uid://iibal1xi2vcn"]
 
 [ext_resource type="PackedScene" uid="uid://bio1udl5pdngs" path="res://Planet/gas_giant.tscn" id="1_n4nu4"]
 [ext_resource type="Texture2D" uid="uid://cev5rbgyxoig0" path="res://spaceScene/59a94d35-9857-450d-8f7a-1c00a7dfac65.jpg" id="2_n4nu4"]
 [ext_resource type="Script" uid="uid://ckp5qfn7gfp7g" path="res://Planet/gasgiantplanet.gd" id="2_wmans"]
 [ext_resource type="PackedScene" uid="uid://tv3lb1e6jju7" path="res://Movement/Probe/probe.tscn" id="4_48bhw"]
+[ext_resource type="PackedScene" uid="uid://df5oo3gcgpqgj" path="res://Player/player.tscn" id="5_iqqmu"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_48bhw"]
 radius = 5.07236
@@ -30,6 +31,11 @@ volumetric_fog_density = 0.02
 volumetric_fog_emission_energy = 0.5
 volumetric_fog_detail_spread = 4.39226
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_iqqmu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tp7dn"]
+size = Vector3(48, 1, 52)
+
 [node name="Space" type="Node3D"]
 
 [node name="GasGiant" parent="." instance=ExtResource("1_n4nu4")]
@@ -54,4 +60,16 @@ directional_shadow_max_distance = 6009.2
 sky_mode = 1
 
 [node name="Probe" parent="." instance=ExtResource("4_48bhw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 379.567, 33.2793, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 445.997, 1.09137, 778.931)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 435.324, 0, 775.948)
+disable_mode = 1
+physics_material_override = SubResource("PhysicsMaterial_iqqmu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.08545, 0, 3.71033)
+shape = SubResource("BoxShape3D_tp7dn")
+
+[node name="player" parent="." instance=ExtResource("5_iqqmu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 431, 2, 776)

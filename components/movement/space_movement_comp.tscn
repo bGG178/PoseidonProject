@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cingmxbwdfd2k"]
+
+[ext_resource type="Script" uid="uid://7qtoxx2tbjot" path="res://space_movement_comp.gd" id="1_bmygf"]
+
+[node name="SpaceMovementComp" type="Node"]
+script = ExtResource("1_bmygf")

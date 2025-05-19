@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://tv3lb1e6jju7"]
+[gd_scene load_steps=6 format=3 uid="uid://tv3lb1e6jju7"]
 
 [ext_resource type="Script" uid="uid://cwwpjvinhtlci" path="res://Movement/Probe/probe.gd" id="1_i821u"]
 [ext_resource type="PackedScene" uid="uid://sqoftpu2hwbq" path="res://Movement/Probe/ship_probe_concept.glb" id="2_r0qd1"]
+[ext_resource type="PackedScene" uid="uid://cingmxbwdfd2k" path="res://components/movement/space_movement_comp.tscn" id="3_t4y7c"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kspjn"]
 radius = 0.501549
@@ -24,19 +25,27 @@ shape = SubResource("CapsuleShape3D_t4y7c")
 [node name="ProbeModel" parent="." instance=ExtResource("2_r0qd1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.43483, 0, 0, 0)
 
-[node name="Camera" type="Camera3D" parent="."]
+[node name="ProbeCamera" type="Camera3D" parent="."]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0.0347865, 0.200206, 0.301194)
+visible = false
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="Control" parent="ProbeCamera"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="SpeedIndicator" type="RichTextLabel" parent="UI"]
+[node name="SpeedIndicator" type="RichTextLabel" parent="ProbeCamera/UI"]
 layout_mode = 0
 offset_right = 424.0
 offset_bottom = 106.0
 theme_override_font_sizes/normal_font_size = 30
 text = "fghfgh"
 fit_content = true
+
+[node name="Components" type="Node3D" parent="."]
+
+[node name="SpaceMovementComp" parent="Components" instance=ExtResource("3_t4y7c")]
+
+[connection signal="visibility_changed" from="ProbeCamera" to="." method="_on_camera_visibility_changed"]
